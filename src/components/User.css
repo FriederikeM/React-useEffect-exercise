@@ -1,0 +1,14 @@
+.user-info {
+  border: 1px solid grey;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.female {
+  background-color: aquamarine;
+}
+
+.not-female {
+  background-color: plum;
+}
