@@ -7,9 +7,9 @@ function UserList() {
   const [amount, setAmount] = useState();
   const [filter, setFilter] = useState("");
 
-  const baseUrl = "https://randomuser.me/api/";
-  let url = baseUrl;
   useEffect(() => {
+    const baseUrl = "https://randomuser.me/api/";
+    let url = baseUrl;
     if (amount) {
       url = `${baseUrl}${amount}`;
     }
@@ -27,32 +27,29 @@ function UserList() {
     setAmount(`?results=${input.value}`);
   }
 
-  useEffect(() => {
-    if (filter) {
-      url = `${baseUrl}${filter}${amount}`;
-    }
-
-    fetch(url)
-      .then((res) => res.json())
-      .then((data) => {
-        setUsers(data.results);
-      });
-  }, [filter]);
+  let filteredUsers;
+  if (filter === "female") {
+    filteredUsers = users.filter((user) => user.gender === "female");
+  } else if (filter === "male") {
+    filteredUsers = users.filter((user) => user.gender === "male");
+  } else {
+    filteredUsers = users;
+  }
 
   function handleAllFilter() {
     setFilter("");
   }
 
   function handleFemaleFilter() {
-    setFilter("?gender=female");
+    setFilter("female");
   }
 
   function handleMaleFilter() {
-    setFilter("?gender=male");
+    setFilter("male");
   }
 
   function renderUsers() {
-    return users.map((user) => (
+    return filteredUsers.map((user) => (
       <User
         gender={user.gender}
         firstName={user.name.first}
