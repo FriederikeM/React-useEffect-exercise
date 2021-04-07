@@ -27,15 +27,6 @@ function UserList() {
     setAmount(`?results=${input.value}`);
   }
 
-  let filteredUsers;
-  if (filter === "female") {
-    filteredUsers = users.filter((user) => user.gender === "female");
-  } else if (filter === "male") {
-    filteredUsers = users.filter((user) => user.gender === "male");
-  } else {
-    filteredUsers = users;
-  }
-
   function handleAllFilter() {
     setFilter("");
   }
@@ -49,6 +40,14 @@ function UserList() {
   }
 
   function renderUsers() {
+    let filteredUsers;
+    if (filter === "female") {
+      filteredUsers = users.filter((user) => user.gender === "female");
+    } else if (filter === "male") {
+      filteredUsers = users.filter((user) => user.gender === "male");
+    } else {
+      filteredUsers = users;
+    }
     return filteredUsers.map((user) => (
       <User
         gender={user.gender}
